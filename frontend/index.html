@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Control de Péndulo Invertido</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+          <button class="toggle-btn" id="toggleBtn">☰</button>
+
+          <nav class="nav-menu">
+            <button class="nav-btn active" data-page="home">
+              <span class="nav-emoji">🏠</span>
+              <span class="nav-text">Home</span>
+            </button>
+            <button class="nav-btn" data-page="pendulum">
+              <span class="nav-emoji">🕰️</span>
+              <span class="nav-text">Pendulum</span>
+            </button>
+            <button class="nav-btn" data-page="train">
+              <span class="nav-emoji">🤖</span>
+              <span class="nav-text">Train</span>
+            </button>
+            <button class="nav-btn" data-page="graphs">
+              <span class="nav-emoji">📈</span>
+              <span class="nav-text">Gráficas</span>
+            </button>
+          </nav>
+
+          <div class="sidebar-footer">
+            <button class="nav-btn exit-btn" id="exitBtn">
+              <span class="nav-emoji">⏻</span>
+              <span class="nav-text">Exit</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Home Page -->
+        <div class="page" id="homePage">
+          <h1 class="page-title">Home</h1>
+          <p class="page-subtitle">Bienvenido — Péndulo Invertido</p>
+          <div class="page-content">
+            <div class="welcome-card">
+              <h2>Sistema de Control de Péndulo Invertido</h2>
+              <p>
+                Simulación y control de un péndulo invertido sobre un carrito.
+              </p>
+              <p>Selecciona una opción del menú lateral para comenzar.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pendulum Page -->
+        <div class="page hidden" id="pendulumPage">
+          <h1 class="page-title">Pendulum</h1>
+          <p class="page-subtitle">Visualización y controles del péndulo</p>
+
+          <div class="control-panel">
+            <div class="control-group">
+              <label>Tipo de control:</label>
+              <select id="controlType">
+                <option value="LQR">LQR</option>
+                <option value="LQR + Swim up">LQR + Swim up</option>
+                <option value="SAC">SAC</option>
+                <option value="DDPG">DDPG</option>
+              </select>
+            </div>
+
+            <div class="control-group">
+              <label>Puertos COM:</label>
+              <select id="comPort">
+                <option value="COM3">COM3</option>
+                <option value="COM4">COM4</option>
+                <option value="COM5">COM5</option>
+              </select>
+            </div>
+
+            <div class="button-group">
+              <button id="runBtn" class="btn-run">▶️ Ejecutar</button>
+              <button id="stopBtn" class="btn-stop">⏸️ Parar</button>
+            </div>
+          </div>
+
+          <div class="visualization-panel">
+            <canvas id="pendulumCanvas" width="800" height="400"></canvas>
+          </div>
+
+          <div class="stats-panel">
+            <div class="stat">
+              <span class="stat-label">Posición:</span>
+              <span class="stat-value" id="positionVal">0.00</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Velocidad:</span>
+              <span class="stat-value" id="velocityVal">0.00</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Ángulo:</span>
+              <span class="stat-value" id="angleVal">0.00</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Vel. Angular:</span>
+              <span class="stat-value" id="angularVelVal">0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Train Page -->
+        <div class="page hidden" id="trainPage">
+          <h1 class="page-title">Train</h1>
+          <p class="page-subtitle">Entrenamiento / Simulación</p>
+          <div class="page-content">
+            <div class="info-card">
+              <h3>Entrenamiento de modelos</h3>
+              <p>
+                Aquí se mostrarán los controles para entrenar modelos de IA.
+              </p>
+              <button class="btn-train" id="trainBtn">
+                Iniciar Entrenamiento
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Graphs Page -->
+        <div class="page hidden" id="graphsPage">
+          <h1 class="page-title">Gráficas</h1>
+          <p class="page-subtitle">Gráficas de respuesta / pérdida</p>
+          <div class="page-content">
+            <canvas id="graphsCanvas" width="800" height="400"></canvas>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="pendulum-sim.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
